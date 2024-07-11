@@ -25,9 +25,12 @@ const router = createBrowserRouter([
     loader: async ({ params }) => {
       console.log("hi");
       try {
-        const res = await axios.get(`http://localhost:8000/blog`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://blogbackend-2qdy.onrender.com/blog`,
+          {
+            withCredentials: true,
+          }
+        );
         const data = await res.data;
         console.log(data);
         return data;
@@ -42,9 +45,12 @@ const router = createBrowserRouter([
     loader: async ({ params }) => {
       console.log("hi");
       try {
-        const res = await axios.get(`http://localhost:8000/dashboard`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://blogbackend-2qdy.onrender.com/dashboard`,
+          {
+            withCredentials: true,
+          }
+        );
         const data = await res.data;
 
         return data;
@@ -87,9 +93,12 @@ const router = createBrowserRouter([
     loader: async ({ params }) => {
       console.log("hi");
       try {
-        const res = await axios.get(`http://localhost:8000/blog/${params.id}`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://blogbackend-2qdy.onrender.com/blog/${params.id}`,
+          {
+            withCredentials: true,
+          }
+        );
         const data = await res.data;
         console.log(data);
         return data;
@@ -104,9 +113,12 @@ const router = createBrowserRouter([
     loader: async ({ params }) => {
       console.log("hi");
       try {
-        const res = await axios.get(`http://localhost:8000/Yourblog`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://blogbackend-2qdy.onrender.com/Yourblog`,
+          {
+            withCredentials: true,
+          }
+        );
         const data = await res.data;
 
         return data;

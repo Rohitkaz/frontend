@@ -12,10 +12,13 @@ const Register = () => {
   const navigate = useNavigate();
   const Register = async () => {
     console.log("hi");
-    const result = await axios.post("http://localhost:8000/Auth/register", {
-      name: name,
-      password: password,
-    });
+    const result = await axios.post(
+      "https://blogbackend-2qdy.onrender.com/Auth/register",
+      {
+        name: name,
+        password: password,
+      }
+    );
     console.log(result.status);
 
     if (result.status == 200 || result.status == 409) return navigate("/Login");

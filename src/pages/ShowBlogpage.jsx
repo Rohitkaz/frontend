@@ -30,9 +30,12 @@ const ShowBlogPage = () => {
       console.log("hi");
 
       try {
-        const res = await axios.get(`http://localhost:8000/like/${blog._id}`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://blogbackend-2qdy.onrender.com/like/${blog._id}`,
+          {
+            withCredentials: true,
+          }
+        );
         setisLiked(true);
         setLikes(likes + 1);
         set;
@@ -44,7 +47,7 @@ const ShowBlogPage = () => {
       console.log("hello");
       try {
         const res = await axios.get(
-          `http://localhost:8000/dislike/${blog._id}`,
+          `https://blogbackend-2qdy.onrender.com/dislike/${blog._id}`,
           {
             withCredentials: true,
           }

@@ -13,7 +13,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const logout = async () => {
     const result = await axios.get(
-      "http://localhost:8000/Auth/logout",
+      "https://blogbackend-2qdy.onrender.com/Auth/logout",
 
       {
         withCredentials: true,

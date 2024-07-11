@@ -44,7 +44,7 @@ const BlogForm = () => {
         console.log(blogcnt);*/
     console.log(contentBox);
     const result = await axios.post(
-      "http://localhost:8000/newblog",
+      "https://blogbackend-2qdy.onrender.com/newblog",
       formData,
       {
         withCredentials: true,

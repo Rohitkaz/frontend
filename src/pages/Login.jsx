@@ -12,7 +12,7 @@ const Login = () => {
   const login = async () => {
     console.log(name);
     const result = await axios.post(
-      "http://localhost:8000/Auth/login",
+      "https://blogbackend-2qdy.onrender.com/Auth/login",
       { name: name, password: password },
       {
         withCredentials: true,
