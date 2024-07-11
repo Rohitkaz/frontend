@@ -4,7 +4,7 @@ const BlogCard = ({ blogdata }) => {
   return (
     <div className=" flex flex-col gap-1 w-[75%] sm:w-[23%]  h-[90%] md:[80%] rounded-lg rounded-t-lg  bg-orange-300 shadow-2xl shadow-gray-400 z-7">
       <img
-        src={`images/${blogdata.image}`}
+        src={`https://blogbackend-2qdy.onrender.com/images/${blogdata.image}`}
         className="w-[100%] h-[50%] rounded-t-lg "
       ></img>
       <Link
