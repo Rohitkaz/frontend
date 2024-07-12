@@ -13,7 +13,7 @@ const Register = () => {
   const Register = async () => {
     console.log("hi");
     const result = await axios.post(
-      "https://blogbackend-2qdy.onrender.com/Auth/register",
+      "https://blog-backend-u88k.onrender.com/Auth/register",
       {
         name: name,
         password: password,

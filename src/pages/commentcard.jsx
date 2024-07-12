@@ -23,7 +23,7 @@ const Commentcard = ({ comment, index, change }) => {
     console.log(comment.postId);
     try {
       const res = await axios.post(
-        `https://blogbackend-2qdy.onrender.com/reply`,
+        `https://blog-backend-u88k.onrender.com/reply`,
         comm,
         {
           withCredentials: true,
@@ -41,7 +41,7 @@ const Commentcard = ({ comment, index, change }) => {
     const commentid = comment._id;
     try {
       const res = await axios.post(
-        `https://blogbackend-2qdy.onrender.com/likecomments`,
+        `https://blog-backend-u88k.onrender.com/likecomments`,
         { commentid: commentid },
         {
           withCredentials: true,

@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       console.log("hi");
       try {
         const res = await axios.get(
-          `https://blogbackend-2qdy.onrender.com/blog`,
+          `https://blog-backend-u88k.onrender.com/blog`,
           {
             withCredentials: true,
           }
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       console.log("hi");
       try {
         const res = await axios.get(
-          `https://blogbackend-2qdy.onrender.com/dashboard`,
+          `https://blog-backend-u88k.onrender.com/dashboard`,
           {
             withCredentials: true,
           }
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
       console.log("hi");
       try {
         const res = await axios.get(
-          `https://blogbackend-2qdy.onrender.com/blog/${params.id}`,
+          `https://blog-backend-u88k.onrender.com/blog/${params.id}`,
           {
             withCredentials: true,
           }
@@ -114,7 +114,7 @@ const router = createBrowserRouter([
       console.log("hi");
       try {
         const res = await axios.get(
-          `https://blogbackend-2qdy.onrender.com/Yourblog`,
+          `https://blog-backend-u88k.onrender.com/Yourblog`,
           {
             withCredentials: true,
           }
