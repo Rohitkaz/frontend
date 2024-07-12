@@ -19,7 +19,7 @@ const BlogCard = ({ blogdata }) => {
       >
         {blogdata.description}
       </p>
-      <div className=" flex flex-row w-[100%] h-[13%] font-heading font-semibold text-center mt-2 gap-2 ">
+      <div className=" sticky flex flex-row w-[100%] h-[13%] font-heading font-semibold text-center mt-2 gap-2 ">
         <img
           className="h-[100%] w-[20%]  rounded-[47%] object-cover ml-2 "
           src="images/user.png"
