@@ -22,13 +22,9 @@ const Commentcard = ({ comment, index, change }) => {
     };
     console.log(comment.postId);
     try {
-      const res = await axios.post(
-        `https://blog-backend-u88k.onrender.com/reply`,
-        comm,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`http://localhost:8000/reply`, comm, {
+        withCredentials: true,
+      });
       change(res.data);
     } catch (err) {
       console.log(err.message);
@@ -41,7 +37,7 @@ const Commentcard = ({ comment, index, change }) => {
     const commentid = comment._id;
     try {
       const res = await axios.post(
-        `https://blog-backend-u88k.onrender.com/likecomments`,
+        `http://localhost:8000/likecomments`,
         { commentid: commentid },
         {
           withCredentials: true,

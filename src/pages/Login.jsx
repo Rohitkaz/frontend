@@ -1,18 +1,21 @@
-import React from "react";
+import React, { createContext } from "react";
 import Header from "./Header";
 import { Link, redirect } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuthcontext } from "./context";
 
 const Login = () => {
   const [name, setName] = useState();
   const [password, setPassword] = useState();
+
   const navigate = useNavigate();
+  const context = useAuthcontext();
   const login = async () => {
     console.log(name);
     const result = await axios.post(
-      "https://blog-backend-u88k.onrender.com/Auth/login",
+      "http://localhost:8000/Auth/login",
       { name: name, password: password },
       {
         withCredentials: true,
@@ -20,7 +23,9 @@ const Login = () => {
     );
     console.log(result.status);
     if (result.status == 404) navigate("/register");
-    if (result.status == 200) navigate("/Dashboard");
+    if (result.status == 200) {
+      navigate("/Dashboard");
+    }
   };
   return (
     <>

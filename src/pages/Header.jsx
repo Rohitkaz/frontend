@@ -1,15 +1,31 @@
 import { CiSearch } from "react-icons/ci";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdClose } from "react-icons/md";
-import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import BlogCard from "./BlogCard";
+import { useAuthcontext } from "./context";
+import { Navigate } from "react-router-dom";
 const Header = () => {
   const [ishidden, setIsHidden] = useState(false);
   const [inputwidth, setInputwidth] = useState("w-[60%]");
   const [isTrue, setIsTrue] = useState(false);
+  const context = useAuthcontext();
+  console.log(context.user);
+  const navigate = useNavigate();
+  const logout = async () => {
+    const result = await axios.get(
+      "https://blog-backend-u88k.onrender.com/Auth/logout",
 
+      {
+        withCredentials: true,
+      }
+    );
+    if (result.status === 204) {
+      navigate("/");
+    }
+  };
   const openham = () => {
     setIsTrue(true);
     setInputwidth("w-[10%]");
@@ -49,12 +65,24 @@ const Header = () => {
           <li className="hover:text-cyan-600">
             <Link to="/">Home</Link>
           </li>
-          <li className="hover:text-cyan-600">
-            <Link to="/Login">Login</Link>
-          </li>
-          <li className="hover:text-cyan-600">
-            <Link to="/Register">Register</Link>
-          </li>
+          {context.user ? (
+            <li className={`hover:text-cyan-600  `}>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+          ) : (
+            <li className={`hover:text-cyan-600  `}>
+              <Link to="/Login">Login</Link>
+            </li>
+          )}
+          {context.user ? (
+            <li className={`hover:text-cyan-600  `}>
+              <button onClick={logout}>Logout</button>
+            </li>
+          ) : (
+            <li className={`hover:text-cyan-600 `}>
+              <Link to="/Register">Register</Link>
+            </li>
+          )}
         </div>
         <RxHamburgerMenu
           className={`md:hidden text-white h-[100%]  w-[20%] mr-5 ${

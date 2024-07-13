@@ -11,16 +11,6 @@ import axios from "axios";
 const Dashboard = () => {
   const data = useLoaderData();
   const navigate = useNavigate();
-  const logout = async () => {
-    const result = await axios.get(
-      "https://blog-backend-u88k.onrender.com/Auth/logout",
-
-      {
-        withCredentials: true,
-      }
-    );
-    navigate("/Login");
-  };
 
   return (
     <>
@@ -36,9 +26,6 @@ const Dashboard = () => {
           <li className="hover:text-green-600">
             <Link to="/newblog">New Blog</Link>
           </li>
-          <button onClick={logout} className="hover:text-green-600">
-            Logout
-          </button>
         </nav>
         <div className=" ml-[1%]  fond-heading font-bold text-2xl flex flex-row items-center gap-2">
           Welcome Back!

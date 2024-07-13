@@ -20,6 +20,7 @@ const ShowBlogPage = () => {
   const [likes, setLikes] = useState(blog.likes);
   const date = new Date(blog.createdAt).toDateString();
   blog.createdAt = date;
+
   const Comms = () => {
     console.log("hillos");
     setComments((prev) => prev + 1);
@@ -67,12 +68,13 @@ const ShowBlogPage = () => {
     setShowcommentbar(false);
   };
   console.log(blog.content);
+
   return (
-    <div className=" flex flex-row     w-[100%]  ">
+    <div className=" flex flex-row   justify-center    w-[100%]  ">
       <div
-        className={`flex flex-col w-[70%] ${
+        className={`flex  flex-col  md:w-[70%] w-[77%] ${
           showcommentbar ? "blur-sm fixed" : "blur-none absolute"
-        }   gap-2 border-2 ml-[15%]`}
+        }   gap-2 border-2 `}
       >
         <div className="flex justify-center font-heading font-bold text-4xl">
           {blog.maintitle}
