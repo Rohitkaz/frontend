@@ -23,7 +23,9 @@ const Header = () => {
       }
     );
     if (result.status === 204) {
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     }
   };
   const openham = () => {
