@@ -15,7 +15,7 @@ const Login = () => {
   const login = async () => {
     console.log(name);
     const result = await axios.post(
-      "http://localhost:8000/Auth/login",
+      "https://blog-backend-u88k.onrender.com/Auth/login",
       { name: name, password: password },
       {
         withCredentials: true,
