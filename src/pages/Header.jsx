@@ -12,7 +12,7 @@ const Header = () => {
   const [inputwidth, setInputwidth] = useState("w-[60%]");
   const [isTrue, setIsTrue] = useState(false);
   const context = useAuthcontext();
-  console.log(context.user);
+
   const navigate = useNavigate();
   const logout = async () => {
     const result = await axios.get(
@@ -38,7 +38,7 @@ const Header = () => {
   };
 
   return (
-    <div className=" flex flex-row w-screen bg-black h-[40px]  ">
+    <div className=" flex flex-row w-screen bg-black h-[40px] mt-[0px]  fixed z-10">
       <div
         className={`flex flex-row ${inputwidth} md:w-[40%] h-[100%] gap-2 justify-center ml-[3%] md:ml-0 `}
       >

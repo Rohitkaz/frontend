@@ -7,6 +7,7 @@ import { RiFileList3Fill } from "react-icons/ri";
 import { Navigate } from "react-router-dom";
 import { PiHandWavingFill } from "react-icons/pi";
 import { MdSignalCellularNodata } from "react-icons/md";
+import Dashboardheader from "./Dashboardheader";
 import axios from "axios";
 const Dashboard = () => {
   const data = useLoaderData();
@@ -15,18 +16,8 @@ const Dashboard = () => {
   return (
     <>
       <Header />
-      <div className=" flex flex-col w-[screen] h-dvh">
-        <nav className="flex  flex-row w-[screen] justify-between md:justify-start h-[42px] items-center font-heading list-none md:gap-4  font-bold border-2 border-stone-400">
-          <li className="hover:text-green-600 pl-[1%] ">
-            <Link>Dashboard</Link>
-          </li>
-          <li className="hover:text-green-600">
-            <Link to="/yourblog">Your Blogs</Link>
-          </li>
-          <li className="hover:text-green-600">
-            <Link to="/newblog">New Blog</Link>
-          </li>
-        </nav>
+      <div className=" flex flex-col w-[screen] h-dvh  ">
+        <Dashboardheader />
         <div className=" ml-[1%]  fond-heading font-bold text-2xl flex flex-row items-center gap-2">
           Welcome Back!
           <PiHandWavingFill className=" " />
@@ -34,7 +25,7 @@ const Dashboard = () => {
         <div className=" ml-[2%]  fond-heading font-bold text-2xl flex items-center">
           Latest comments
         </div>
-        <div className="w-[96%] md:w-[40%] border-2 border-grey h-[70%] md:ml-[2%] ml-[1%] position-fixed overflow-y-scroll scrollbar-thin gap-[2%] ">
+        <div className="w-[96%] flex-wrap md:w-[40%] border-2 border-grey h-[70%] md:ml-[2%] ml-[1%] position-fixed overflow-y-scroll scrollbar-thin gap-[2%] ">
           {data.length > 0 ? (
             <>
               {data.map((comment, index) => (

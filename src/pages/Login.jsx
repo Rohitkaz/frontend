@@ -14,17 +14,19 @@ const Login = () => {
   const context = useAuthcontext();
   const login = async () => {
     console.log(name);
-    const result = await axios.post(
-      "https://blog-backend-u88k.onrender.com/Auth/login",
-      { name: name, password: password },
-      {
-        withCredentials: true,
-      }
-    );
-    console.log(result.status);
-    if (result.status == 404) navigate("/register");
-    if (result.status == 200) {
+    try {
+      const result = await axios.post(
+        "https://blog-backend-u88k.onrender.com/Auth/login",
+        { name: name, password: password },
+        {
+          withCredentials: true,
+        }
+      );
+
       navigate("/Dashboard");
+    } catch (err) {
+      console.log(err);
+      alert(err.response.data);
     }
   };
   return (
@@ -50,7 +52,7 @@ const Login = () => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              type="text"
+              type="password"
               placeholder="Password"
               className="  border-green border-2  w-3/4 md:h-[40px] pl-2 "
             ></input>
