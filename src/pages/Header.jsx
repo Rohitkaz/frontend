@@ -23,7 +23,7 @@ const Header = () => {
       }
     );
     if (result.status === 204) {
-      navigate("/");
+      navigate("/login");
     }
   };
   const openham = () => {
