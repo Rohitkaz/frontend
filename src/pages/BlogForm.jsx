@@ -104,6 +104,7 @@ const BlogForm = () => {
                 id="fileinput"
                 type="file"
                 className="hidden"
+                accept="image/png, image/jpeg,image/jpg,img/gif"
               ></input>
 
               <input

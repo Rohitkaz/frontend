@@ -40,7 +40,7 @@ const Home = () => {
             <div className="flex flex-row   w-[100%]  h-[90%]   relative ">
               <BsArrowLeftCircle
                 onClick={decind}
-                className="w-[10%]  md:h-[5%] h-[10%] absolute  mt-[35%]  hover:text-red-600 z-5 shadow-sm "
+                className="w-[10%]  md:h-[5%] h-[10%] absolute shadow-lg mt-[50%]   md:mt-[35%]  hover:text-red-600 z-5  "
               />
 
               {Popularpost.map((blog, index) => (
@@ -53,7 +53,7 @@ const Home = () => {
 
               <BsArrowRightCircle
                 onClick={incind}
-                className="w-[10%]  md:h-[5%] right-1 z-5 h-[10%] hover:text-red-600  mt-[35%] absolute"
+                className="w-[10%]  md:h-[5%] right-1  h-[10%] hover:text-red-600 mt-[50%] md:mt-[35%] absolute"
               />
             </div>
           </div>

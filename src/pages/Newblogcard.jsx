@@ -6,7 +6,7 @@ const NewBlogCard = ({ blogdata }) => {
   };
   return (
     <div
-      className={` flex  flex-col gap-1 w-[100%]  h-[100%]  bg-orange-300  rounded-lg rounded-t-lg z-7 
+      className={` flex  flex-col gap-1 w-[100%]  border-2  shadow-gray-400  shadow-lg h-[100%]  bg-orange-300  rounded-lg rounded-t-lg z-7 
        `}
     >
       <img
@@ -21,7 +21,7 @@ const NewBlogCard = ({ blogdata }) => {
         {blogdata.maintitle}
       </div>
       <div
-        className="  ml-[4%] flex  w-[100%] h-[13%] text-start font-heading font-
+        className="  ml-[4%] flex  w-[100%] h-[13%] text-start font-heading font-bold
           line-clamp-2 text-wrap "
       >
         {blogdata.description}

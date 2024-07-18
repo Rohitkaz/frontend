@@ -6,7 +6,7 @@ const BlogCard = ({ blogdata, slideindex, index }) => {
   };
   return (
     <div
-      className={` flex  flex-col gap-1 w-[100%]  h-[100%]  bg-orange-300  rounded-lg rounded-t-lg z-7 ${
+      className={` flex  flex-col gap-1 w-[100%]  border-2 shadow-lg shadow-gray-400 h-[100%]  bg-orange-300  rounded-lg rounded-t-lg z-7 ${
         slideindex === index ? null : "hidden"
       }`}
     >

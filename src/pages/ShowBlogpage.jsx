@@ -102,7 +102,7 @@ const ShowBlogPage = () => {
         </div>
         <img
           src={`https://blog-backend-u88k.onrender.com/images/${blog.image}`}
-          className="w-[96%] h-[50%] ml-[2%] rounded-md "
+          className="w-[96%] h-[50%] md:h-[500px] ml-[2%] rounded-md "
         ></img>
         <div className="flex flex-col w-[100%] h- font-heading">
           {blog.content.map((para, ind) => (
