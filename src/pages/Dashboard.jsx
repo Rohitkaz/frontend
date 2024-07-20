@@ -28,11 +28,11 @@ const Dashboard = () => {
       </div>
       <div className=" flex md:flex-row flex-col w-[screen] h-dvh md:gap-8 gap-4  ">
         <div className=" ml-[1%] flex flex-col md:w-[40%] w-[100%]  h-[100%]  ">
-          <div className=" ml-[2%]  font-heading font-extrabold text-2xl flex flex-row items-center gap-2">
+          <div className=" ml-[2%]  font-heading font-extrabold text-lg md:text-2xl flex flex-row items-center gap-2">
             Welcome Back!
             <PiHandWavingFill className=" " />
           </div>
-          <div className=" ml-[2%]  font-heading font-bold text-2xl flex items-center">
+          <div className=" ml-[2%]  font-heading font-bold  text-lg md:text-2xl flex items-center">
             Latest comments
           </div>
           <div className="w-[96%] flex-wrap shadow-lg rounded-lg md:w-[100%] border-2 border-grey h-[100%] md:h-[70%] md:ml-[2%] ml-[1%] position-fixed overflow-y-scroll scrollbar-thin gap-[4%] md:gap-[2%] ">

@@ -18,6 +18,7 @@ import Allblog from "./pages/Allblog";
 import CommentBar from "./pages/comment";
 import Header1 from "./pages/headercheck";
 import Root from "./pages/Root";
+import { Await, defer } from "react-router-dom";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,16 +29,16 @@ const router = createBrowserRouter([
         path: "/",
         loader: async ({ params }) => {
           console.log("hi");
+
           try {
-            const res = await axios.get(
+            const res = axios.get(
               `https://blog-backend-u88k.onrender.com/blog`,
               {
                 withCredentials: true,
               }
             );
-            const data = await res.data;
-            console.log(data);
-            return data;
+
+            return defer({ res: res });
           } catch (err) {
             return redirect("/");
           }
