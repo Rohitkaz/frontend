@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import axios from "axios";
-import BlogCard from "./BlogCard";
+
 const Header1 = () => {
   const [ishidden, setIsHidden] = useState(false);
   const [inputwidth, setInputwidth] = useState("w-[60%]");

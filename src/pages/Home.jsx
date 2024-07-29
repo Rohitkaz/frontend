@@ -5,15 +5,14 @@ import { BsArrowRightCircle } from "react-icons/bs";
 import { useState } from "react";
 import { Link, Outlet, useLoaderData } from "react-router-dom";
 import axios from "axios";
-import BlogCard from "./BlogCard";
+
 import Header from "./Header";
 import LoadingIcons from "react-loading-icons";
 import { MdElectricalServices } from "react-icons/md";
-import NewBlogCard from "./Newblogcard";
+
 import React from "react";
 import { Await } from "react-router-dom";
 import Slider from "./Slider";
-import Card from "./Card";
 
 const Home = () => {
   const data = useLoaderData();
