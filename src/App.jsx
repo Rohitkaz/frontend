@@ -76,10 +76,7 @@ const router = createBrowserRouter([
         element: <Login />,
         path: "/Login",
       },
-      {
-        element: <Header1 />,
-        path: "/image",
-      },
+
       {
         element: <CommentBar />,
         path: "/contact",
