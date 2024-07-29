@@ -5,7 +5,7 @@ import { BsArrowRightCircle } from "react-icons/bs";
 import { useState } from "react";
 import { Link, Outlet, useLoaderData } from "react-router-dom";
 import axios from "axios";
-
+import Card from "./Card";
 import Header from "./Header";
 import LoadingIcons from "react-loading-icons";
 import { MdElectricalServices } from "react-icons/md";
