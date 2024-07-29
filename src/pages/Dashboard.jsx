@@ -28,7 +28,7 @@ const Dashboard = () => {
       </div>
       <div className=" flex md:flex-row flex-col w-[screen] h-dvh md:gap-8 gap-4  ">
         <div className=" ml-[1%] flex flex-col md:w-[40%] w-[100%]  h-[100%]  ">
-          <div className=" ml-[2%]  font-heading font-extrabold text-lg md:text-2xl flex flex-row items-center gap-2">
+          <div className=" ml-[2%]  font-heading font-extrabold  text-lg md:text-2xl flex flex-row items-center gap-2">
             Welcome Back!
             <PiHandWavingFill className=" " />
           </div>

@@ -52,7 +52,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
     console.log(blogid);
     try {
       const res = await axios.post(
-        `https://blog-backend-u88k.onrender.com/newblog/comment`,
+        `https://blog-backend-u88k.onrender.com/comment`,
         comm,
         {
           withCredentials: true,
@@ -69,7 +69,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
   };
   const showcomments = async () => {
     const comms = await axios.get(
-      `https://blog-backend-u88k.onrender.com/newblog/showcomments/${blogid}`,
+      `https://blog-backend-u88k.onrender.com/showcomments/${blogid}`,
       {
         withCredentials: true,
       }
@@ -122,7 +122,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
                     setShowreplyindex(-1);
                   } else {
                     const res = await axios.get(
-                      `https://blog-backend-u88k.onrender.com/newblog/showreplies/${blogid}/${e.target.id}`,
+                      `https://blog-backend-u88k.onrender.com/showreplies/${blogid}/${e.target.id}`,
 
                       {
                         withCredentials: true,

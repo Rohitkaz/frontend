@@ -38,7 +38,7 @@ const ShowBlogPage = () => {
 
       try {
         const res = await axios.get(
-          `https://blog-backend-u88k.onrender.com/newblog/like/${blog._id}`,
+          `https://blog-backend-u88k.onrender.com/like/${blog._id}`,
           {
             withCredentials: true,
           }
@@ -54,7 +54,7 @@ const ShowBlogPage = () => {
       console.log("hello");
       try {
         const res = await axios.get(
-          `https://blog-backend-u88k.onrender.com/newblog/dislike/${blog._id}`,
+          `https://blog-backend-u88k.onrender.com/dislike/${blog._id}`,
           {
             withCredentials: true,
           }
@@ -109,7 +109,7 @@ const ShowBlogPage = () => {
           </div>
         </div>
         <img
-          src={`https://blog-backend-u88k.onrender.com/newblog/images/${blog.image}`}
+          src={`https://blog-backend-u88k.onrender.com/images/${blog.image}`}
           className="w-[96%] h-[50%] md:h-[500px] ml-[2%] rounded-md "
         ></img>
         <div className="flex flex-col w-[100%] h- font-heading">
