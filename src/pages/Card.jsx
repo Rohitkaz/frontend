@@ -10,7 +10,7 @@ const Card = ({ blogdata }) => {
       <div className="w-full ">
         <img
           className="w-full aspect-auto object-cover rounded-lg"
-          src={`https://blog-backend-u88k.onrender.com/newblog/images/${blogdata.image}`}
+          src={`https://blog-backend-u88k.onrender.com/images/${blogdata.image}`}
           onError={defaultimg}
         ></img>
       </div>
