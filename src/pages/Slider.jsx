@@ -53,7 +53,7 @@ const Slider = ({ popularpost, trending }) => {
         <h1 className="font-heading font-bold md:text-3xl text-2xl">
           Popular posts
         </h1>
-        <div className="b mb-10 border-2 border-gray-700 md:m-3 m-1  overflow-hidden relative  md:w-[650px] w-[94%] h-[450px] p-2  rounded-lg shadow-xl ">
+        <div className="flex items-center mb-10 border-2 border-gray-700 md:m-3 m-1  overflow-hidden relative  md:w-[650px] w-[94%] h-[450px] p-2  rounded-lg shadow-xl ">
           <div
             className={`   flex flex-row    md:gap-7 gap-12 transition-all ease-out duration-300
 
@@ -64,12 +64,12 @@ const Slider = ({ popularpost, trending }) => {
               <CardC blogdata={item} />
             ))}
           </div>
-          <div className=" flex absolute justify-between items-center h-full w-full top-0    ">
+          <div className=" flex flex-row absolute top-[47%] md:gap-[580px] w-full justify-between   ">
             <button onClick={lefttranslate} className="">
               <BsFillArrowLeftCircleFill className="w-[30px] h-[30px]" />
             </button>
             <button onClick={Righttranslate} className="pr-2">
-              <BsFillArrowRightCircleFill className="w-[30px] h-[30px]" />
+              <BsFillArrowRightCircleFill className="w-[30px] h-[30px] right-2" />
             </button>
           </div>
         </div>
