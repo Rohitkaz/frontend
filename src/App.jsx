@@ -16,7 +16,7 @@ import Header from "./pages/Header";
 import Dashboard from "./pages/Dashboard";
 import Allblog from "./pages/Allblog";
 import CommentBar from "./pages/comment";
-import Header1 from "./pages/headercheck";
+
 import Root from "./pages/Root";
 import { Await, defer } from "react-router-dom";
 const router = createBrowserRouter([
