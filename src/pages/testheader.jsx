@@ -8,7 +8,7 @@ import BlogCard from "./BlogCard";
 const Header = () => {
   const [hideham, setHideham] = useState("flex");
   const [margin, setMargin] = useState("hidden opacity-0");
-
+  //comment
   const hamburgermenu = () => {
     setMargin(
       " flex opacity-100  mt-0  transition-all ease duration-700 h-dvh  "
