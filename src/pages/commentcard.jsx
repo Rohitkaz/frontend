@@ -5,8 +5,15 @@ import axios from "axios";
 import Header from "./Header";
 import { IoIosArrowUp } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { useAuthcontext } from "./context";
+const Commentcard = ({
+  comment,
+  index,
+  change,
 
-const Commentcard = ({ comment, index, change }) => {
+  changecomments,
+}) => {
   const [clikes, setClikes] = useState(comment.likes);
   const [isTrue, setIsTrue] = useState(false);
   const [reply, setReply] = useState();
@@ -14,10 +21,45 @@ const Commentcard = ({ comment, index, change }) => {
   const [showreplies, setShowreplies] = useState(false);
   const [showreplyindex, setShowreplyindex] = useState();
   const [replies, setReplies] = useState([]);
+  const [showButtons, setShowbuttons] = useState(false);
+  const [isdeleting, setisdeleting] = useState(false);
+  const context = useAuthcontext();
+  const showButton = () => {
+    if (showButtons === true) setShowbuttons(false);
+    else setShowbuttons(true);
+  };
+  const deletecomment = async () => {
+    if (!context.user) {
+      return alert("First Login to delete comments!");
+    }
+    if (context.user.id !== comment.userId) {
+      return alert("you can delete only your comments!");
+    }
+    setisdeleting(true);
+    try {
+      const res = await axios.delete(
+        `https://blog-backend-u88k.onrender.com/newblog/deletecomment/${comment._id}/${comment.postId}/${comment.parentId}`,
+
+        {
+          withCredentials: true,
+        }
+      );
+
+      changecomments(comment);
+      setisdeleting(false);
+    } catch (err) {
+      setisdeleting(false);
+      alert(err.message);
+    }
+  };
   const sendReply = async (e) => {
+    if (!context.user) {
+      return alert("First Login to send reply");
+    }
     if (!reply) {
       return alert("reply cannot be empty");
     }
+
     const comm = {
       blog_id: comment.postId,
       commentid: e.target.id,
@@ -27,7 +69,7 @@ const Commentcard = ({ comment, index, change }) => {
     console.log(comment.postId);
     try {
       const res = await axios.post(
-        `https://blog-backend-u88k.onrender.com/reply`,
+        `https://blog-backend-u88k.onrender.com/newblog/reply`,
         comm,
         {
           withCredentials: true,
@@ -46,7 +88,7 @@ const Commentcard = ({ comment, index, change }) => {
     const commentid = comment._id;
     try {
       const res = await axios.post(
-        `https://blog-backend-u88k.onrender.com/likecomments`,
+        `https://blog-backend-u88k.onrender.com/newblog/likecomments`,
         { commentid: commentid },
         {
           withCredentials: true,
@@ -60,12 +102,34 @@ const Commentcard = ({ comment, index, change }) => {
   };
   return (
     <div className="flex flex-col items-center w-[100%] h-[90%] gap-1   ">
-      <div className="flex flex-row w-[87%] gap-2">
+      <div className="flex flex-row w-[100%] gap-2">
         <img className="w-[30px] h-[30px]" src="./images/user.png"></img>
-        <div className="flex flex-row w-[90% ] h-[10%]  font-heading text-sm font-bold gap-2">
+        <div className="flex flex-row w-[90%] h-[10%]  font-heading text-sm font-bold gap-2">
           <div>{comment.username}</div>
           {comment.parentUsername ? (
             <div className="text-blue-700">@{comment.parentUsername}</div>
+          ) : null}
+        </div>
+        <div className=" flex flex-col w-[80%] items-center gap-1  ">
+          <BsThreeDotsVertical
+            className=" mt-1 ml-[50%]"
+            onClick={showButton}
+          />
+          {showButtons ? (
+            <div className="  w-[100%] flex justify-center ">
+              {isdeleting ? (
+                <div className="text-red-700 font-heading font-bold">
+                  deleting...
+                </div>
+              ) : (
+                <button
+                  onClick={deletecomment}
+                  className=" ml-[40%] w-[50%] bg-gray-500 font-heading font-bold  hover:bg-red-700 border-2 border-gray-300 rounded-lg"
+                >
+                  Delete
+                </button>
+              )}
+            </div>
           ) : null}
         </div>
       </div>

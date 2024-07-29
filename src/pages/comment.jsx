@@ -7,21 +7,33 @@ import { IoIosArrowUp } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import Commentcard from "./commentcard";
 import { useAuthcontext } from "./context";
-const CommentBar = ({ blogid, blogauthor, change }) => {
+const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
   const [comment, setComment] = useState();
   const context = useAuthcontext();
   const [comments, setComments] = useState([]);
   const [replies, setReplies] = useState([]);
   const [showreplies, setShowreplies] = useState(false);
   const [showreplyindex, setShowreplyindex] = useState();
-  const changereplies = (comment, parentId, index) => {
+  const changereplies = (replies, parentId, index) => {
     console.log(comment);
-    setReplies((prev) => [...prev, comment]);
+    setReplies(replies);
     if (parentId == null) {
       setShowreplies(true);
       setShowreplyindex(index);
     }
   };
+  const changecomments = (comment) => {
+    if (comment.parentId === null) {
+      const comms = comments.filter((item) => item != comment);
+      deccomment();
+      setShowreplies(false);
+      setComments(comms);
+    } else {
+      const rep = replies.filter((item) => item != comment);
+      setReplies(rep);
+    }
+  };
+
   const sendComment = async () => {
     if (!context.user) {
       return alert("First Login to send comments");
@@ -40,20 +52,24 @@ const CommentBar = ({ blogid, blogauthor, change }) => {
     console.log(blogid);
     try {
       const res = await axios.post(
-        `https://blog-backend-u88k.onrender.com/comment`,
+        `https://blog-backend-u88k.onrender.com/newblog/comment`,
         comm,
         {
           withCredentials: true,
         }
       );
-      setComments((prev) => [...prev, res.data]);
+      if (comments.length > 0) {
+        setComments((prev) => [res.data, ...prev]);
+      } else {
+        showcomments();
+      }
     } catch (err) {
       console.log(err.message);
     }
   };
   const showcomments = async () => {
     const comms = await axios.get(
-      `https://blog-backend-u88k.onrender.com/showcomments/${blogid}`,
+      `https://blog-backend-u88k.onrender.com/newblog/showcomments/${blogid}`,
       {
         withCredentials: true,
       }
@@ -96,6 +112,7 @@ const CommentBar = ({ blogid, blogauthor, change }) => {
                 comment={comment}
                 index={index}
                 change={changereplies}
+                changecomments={changecomments}
               />
               <button
                 id={comment._id}
@@ -105,7 +122,7 @@ const CommentBar = ({ blogid, blogauthor, change }) => {
                     setShowreplyindex(-1);
                   } else {
                     const res = await axios.get(
-                      `https://blog-backend-u88k.onrender.com/showreplies/${blogid}/${e.target.id}`,
+                      `https://blog-backend-u88k.onrender.com/newblog/showreplies/${blogid}/${e.target.id}`,
 
                       {
                         withCredentials: true,
@@ -129,6 +146,7 @@ const CommentBar = ({ blogid, blogauthor, change }) => {
                       comment={comment}
                       index={index}
                       change={changereplies}
+                      changecomments={changecomments}
                     />
                   </div>
                 ))}
