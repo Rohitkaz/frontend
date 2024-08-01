@@ -101,10 +101,10 @@ const Commentcard = ({
     }
   };
   return (
-    <div className="flex flex-col items-center w-[100%] h-[90%] gap-1   ">
+    <div className="flex flex-col items-center w-[100%] h-[90%] gap-1 rounded-lg   ">
       <div className="flex flex-row w-[100%] gap-2">
-        <img className="w-[30px] h-[30px]" src="./images/user.png"></img>
-        <div className="flex flex-row w-[90%] h-[10%]  font-heading text-sm font-bold gap-2">
+        <img className="w-[30px] h-[30px]" src="/images/user.png"></img>
+        <div className="flex flex-row w-[90%] h-[10%]  font-heading text-sm font-bold gap-2 mt-1">
           <div>{comment.username}</div>
           {comment.parentUsername ? (
             <div className="text-blue-700">@{comment.parentUsername}</div>
@@ -139,12 +139,14 @@ const Commentcard = ({
       <div className="flex flex-row w-[87%] font-heading justify-between ">
         <button
           onClick={likecomment}
-          className="md:w-[20%] w-[30%] bg-blue-700 text-white hover:text-green-400"
+          className="p-1 bg-gray-500 text-black font-heading font-bold hover:text-green-400 rounded-md hover:translate-x-1 duration-150"
         >
           Like({clikes})
         </button>
-        <div className=" flex md:w-[20%] w-[40%] bg-blue-700 flex-row justify-center items-center border-2  ">
-          <label className="text-white hover:text-green-600">Reply</label>
+        <div className=" p-1 flex  flex-row bg-gray-500 justify-center items-center rounded-md hover:translate-x-1 duration-150  ">
+          <label className="text-black font-heading font-bold hover:text-green-600">
+            Reply
+          </label>
           {isTrue ? (
             <IoIosArrowUp
               className="  w-[30%]  items-center"

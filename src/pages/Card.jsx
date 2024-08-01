@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 const Card = ({ blogdata }) => {
   const defaultimg = (e) => {
-    e.target.src = "./images/noimage.png";
+    e.target.src = "/images/noimage.png";
   };
+  console.log(blogdata);
   return (
     // <div className=" flex justify-center w-screen h-screen bg-gray-200">
-    <div className="flex  flex-col mt-2  md:w-[300px] w-[290px] h-[400px]  rounded-lg p-2 bg-white transform transition-all hover:translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
+    <div className="flex  flex-col mt-2  md:w-[300px] w-[290px] min-h-[400px] max-h-[400px]  rounded-lg p-2 bg-white transform transition-all hover:translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
       <div className="w-full ">
         <img
           className="w-full aspect-auto object-cover rounded-lg"
@@ -18,7 +19,7 @@ const Card = ({ blogdata }) => {
         <h2 className=" font-heading font-bold text-lg line-clamp-1">
           {blogdata.maintitle}
         </h2>
-        <p className=" md:w-[265px] w-[245px] font-heading text-sm text-gray-600 line-clamp-2">
+        <p className=" md:w-[265px] w-[245px] font-heading text-md font-bold text-gray-600 line-clamp-2">
           {blogdata.description}
         </p>
       </div>

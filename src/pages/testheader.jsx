@@ -4,7 +4,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import axios from "axios";
-
+import BlogCard from "./BlogCard";
 const Header = () => {
   const [hideham, setHideham] = useState("flex");
   const [margin, setMargin] = useState("hidden opacity-0");

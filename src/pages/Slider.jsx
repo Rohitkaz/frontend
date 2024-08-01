@@ -8,57 +8,27 @@ const Slider = ({ popularpost, trending }) => {
   console.log(popularpost);
   console.log(trending);
   const [current, setCurrent] = useState(0);
-  const [array, setArray] = useState([
-    {
-      maintitle: "Heading1",
-      discription:
-        "lorem dflfsdgsdglagdg ddsggsgsdlg sadgasada;gsdgsd;ggasdagsldg;sdg",
-      author: "Rohit",
-      createdAt: "03/04/24",
-    },
-    {
-      maintitle: "Heading2",
-      discription: "lorem dflfsdgsdglagd",
-      author: "Rohit",
-      createdAt: "03/04/24",
-    },
-    {
-      maintitle: "Heading3",
-      discription:
-        "lorem dflfsdgsdglagdg ddsggsgsdlg sadgasada;gsdgsd;ggasdagsldg;sdg",
-      author: "Rohit",
-      createdAt: "03/04/24",
-    },
-    {
-      maintitle: "Heading4",
-      discription:
-        "lorem dflfsdgsdglagdg ddsggsgsdlg sadgasada;gsdgsd;ggasdagsldg;sdg",
-      author: "Rohit",
-      createdAt: "03/04/24",
-    },
-  ]);
+
   const lefttranslate = () => {
     if (current === 0) {
-      setCurrent(array.length - 1);
+      setCurrent(popularpost.length - 1);
     } else setCurrent(current - 1);
   };
   const Righttranslate = () => {
-    if (current === array.length - 1) {
+    if (current === popularpost.length - 1) {
       setCurrent(0);
     } else setCurrent(current + 1);
   };
   return (
-    <div className="w-[100%]  flex md:flex-row flex-wrap   bg-gray-200 md:ml-10">
-      <div className="w-[100%] md:w-[650px]">
-        <h1 className="font-heading font-bold md:text-3xl text-2xl">
-          Popular posts
-        </h1>
-        <div className="flex items-center mb-10 border-2 border-gray-700 md:m-3 m-1  overflow-hidden relative  md:w-[650px] w-[94%] h-[450px] p-2  rounded-lg shadow-xl ">
+    <div className="w-[100%]  flex  flex-col md:pl-10  md:flex-row gap-10   bg-gray-200 ">
+      <div className=" flex flex-col ml-2  w-[100%] md:w-[650px]">
+        <h1 className="font-heading font-bold text-4xl  ">| Popular Blogs</h1>
+        <div className="flex  border-2 mt-4 border-gray-700  overflow-hidden relative  md:w-[650px] w-[94%] h-[450px]  rounded-lg shadow-xl ">
           <div
-            className={`   flex flex-row    md:gap-7 gap-12 transition-all ease-out duration-300
+            className={`   flex flex-row  gap-4 p-2 items-center  over-x-scroll scrollbar-hidden  w-[100%]   transition-all ease-out duration-300
 
-           md:ml-[32px]    md:mr-5 `}
-            style={{ transform: `translateX(-${current * 320}px)` }}
+           `}
+            style={{ transform: ` translateX(-${current * 100}%)` }}
           >
             {popularpost.map((item) => (
               <CardC blogdata={item} />
@@ -74,11 +44,11 @@ const Slider = ({ popularpost, trending }) => {
           </div>
         </div>
       </div>
-      <div className="  md:ml-20">
-        <h1 className="font-heading font-bold md:text-3xl text-2xl">
-          Trending posts
+      <div className=" w-full  md:ml-7">
+        <h1 className=" w-full ml-4  font-heading font-bold text-4xl ">
+          | Trending Blogs
         </h1>
-        <div className="  flex gap-4 h-[450px] md:w-[350px] w-[320px] pl-2 md:pl-4 overflow-x-hidden shadow-lg  pt-2 md:m-3 ml-1 mt-3   flex-col   overflow-y-scroll border-2  border-gray-700     scrollbar-track-stone-100 rounded-lg ">
+        <div className="  flex  gap-4 md:h-[450px] md:w-[350px] w-[100%] md:pt-4 flex-wrap overflow-x-hidden  mt-3.5 md:flex-nowrap justify-center  md:justify-start md:items-center    md:flex-col  md:overflow-y-scroll md:border-2  border-gray-700  md:scrollbar-track-teal-400    rounded-lg ">
           {trending.map((item) => (
             <Card blogdata={item} />
           ))}

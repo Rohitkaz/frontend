@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 const CardC = ({ blogdata }) => {
   const defaultimg = (e) => {
-    e.target.src = "./images/noimage.png";
+    e.target.src = "/images/noimage.png";
   };
   return (
     // <div className=" flex justify-center w-screen h-screen bg-gray-200">
-    <div className="flex flex-col mt-2 mb-5   md:w-[280px] h-[400px]  rounded-lg p-2 bg-white transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
-      <div className="w-full ">
+    <div className="flex flex-col   min-w-[100%]   min-h-[430px] max-h-[430px]  rounded-lg p-2 bg-white transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
+      <div className="w-full     ">
         <img
-          className="w-full aspect-auto object-cover rounded-lg"
+          className="w-full h-[250px]  object-cover  rounded-lg"
           src={`https://blog-backend-u88k.onrender.com/images/${blogdata.image}`}
           onError={defaultimg}
         ></img>
@@ -18,7 +18,7 @@ const CardC = ({ blogdata }) => {
         <h2 className="font-heading font-bold text-lg line-clamp-1">
           {blogdata.maintitle}
         </h2>
-        <p className=" md:w-[265px] w-[245px]  font-heading text-sm text-gray-600 line-clamp-3 ">
+        <p className=" md:w-[265px] min-w-[95%] min-he  font-heading text-md font-bold text-gray-600 line-clamp-3 ">
           {blogdata.description}
         </p>
       </div>

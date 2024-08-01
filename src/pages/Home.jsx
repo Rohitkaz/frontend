@@ -5,11 +5,11 @@ import { BsArrowRightCircle } from "react-icons/bs";
 import { useState } from "react";
 import { Link, Outlet, useLoaderData } from "react-router-dom";
 import axios from "axios";
-
+import BlogCard from "./BlogCard";
 import Header from "./Header";
 import LoadingIcons from "react-loading-icons";
 import { MdElectricalServices } from "react-icons/md";
-
+import NewBlogCard from "./Newblogcard";
 import React from "react";
 import { Await } from "react-router-dom";
 import Slider from "./Slider";
@@ -40,11 +40,11 @@ const Home = () => {
                     <Slider popularpost={Popularpost} trending={Trending} />
                   </div>
 
-                  <div className="flex-col   w-full md:ml-10 mt-2  ">
-                    <h1 className="font-heading font-bold md:text-3xl text-2xl  ml-3">
-                      Latest posts
+                  <div className="flex-col   w-full md:ml-10 md:mt-5 mt-5  ">
+                    <h1 className="font-heading font-bold text-4xl   ml-3">
+                      | Latest Blogs.
                     </h1>
-                    <div className=" flex  flex-wrap w-full ml-3 md:mt-4 mt-2 gap-8">
+                    <div className=" flex  flex-wrap w-full justify-center md:justify-start md:mt-4  gap-8">
                       {Latestpost.map((item) => (
                         <Card blogdata={item} />
                       ))}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Scrollbar } from "react-scrollbars-custom";
 import axios from "axios";
@@ -14,6 +14,20 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
   const [replies, setReplies] = useState([]);
   const [showreplies, setShowreplies] = useState(false);
   const [showreplyindex, setShowreplyindex] = useState();
+  useEffect(() => {
+    const showcomments = async () => {
+      const comms = await axios.get(
+        `https://blog-backend-u88k.onrender.com/showcomments/${blogid}`,
+        {
+          withCredentials: true,
+        }
+      );
+      const comm = comms.data;
+      console.log(comm);
+      setComments(comm);
+    };
+    showcomments();
+  }, []);
   const changereplies = (replies, parentId, index) => {
     console.log(comment);
     setReplies(replies);
@@ -80,8 +94,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
     setComments(comm);
   };
   return (
-    <div className="flex flex-col w-[100%] border-2 items-center gap-1 border-none h-dvh ">
-      <div className="w-[100%] h-[5%]"></div>
+    <div className="flex flex-col w-[100%] border-2 items-center gap-1 border-none h-dvh p-3">
       <textarea
         Name={comment}
         placeholder="What's Your Thought?"
@@ -104,10 +117,10 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
       >
         Showcomments
       </button>
-      <div className="flex flex-col w-[100%] h-[80%]  items-center gap-1 mt-2 overflow-y-scroll scrollbar-thin  ">
+      <div className="flex flex-col w-[100%] h-[80%]  items-center gap-1 mt-2 overflow-y-scroll scrollbar-track-black">
         {comments.map((comment, index) => (
           <>
-            <div className="flex flex-col w-[87%]  items-center  mt-2 border-2 border-red">
+            <div className="flex flex-col w-[87%]  items-center  mt-2 border-2 border-red rounded-lg">
               <Commentcard
                 comment={comment}
                 index={index}
@@ -133,7 +146,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
                     setShowreplyindex(index);
                   }
                 }}
-                className="font-heading w-[87%] mt-0 rounded-lg text-white bg-blue-700 h-[30px]"
+                className="font-heading w-[87%] mt-0 rounded-lg text-black font-bold bg-gray-500 h-[30px]"
               >
                 Replies
               </button>
@@ -141,7 +154,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
             {showreplies && showreplyindex === index ? (
               <>
                 {replies.map((comment, index) => (
-                  <div className="w-[77%] border-2 border-emerald-600 ml-10">
+                  <div className="w-[77%] border-2 border-emerald-600 md:ml-10 ml-[10%] rounded-lg">
                     <Commentcard
                       comment={comment}
                       index={index}
