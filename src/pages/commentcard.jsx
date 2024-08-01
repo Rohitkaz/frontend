@@ -124,7 +124,7 @@ const Commentcard = ({
               ) : (
                 <button
                   onClick={deletecomment}
-                  className=" ml-[40%] w-[50%] bg-gray-500 font-heading font-bold  hover:bg-red-700 border-2 border-gray-300 rounded-lg"
+                  className=" ml-[40%] md:p-1 bg-gray-500 font-heading font-bold  hover:bg-red-700 border-2 border-gray-300 rounded-lg"
                 >
                   Delete
                 </button>
