@@ -20,7 +20,7 @@ const Slider = ({ popularpost, trending }) => {
     } else setCurrent(current + 1);
   };
   return (
-    <div className="w-[100%]  flex  flex-col md:pl-10  md:flex-row gap-10   bg-gray-200 ">
+    <div className="w-[100%]  flex  flex-col md:pl-10  lg:flex-row gap-10   bg-gray-200 ">
       <div className=" flex flex-col ml-2  w-[100%] md:w-[650px]">
         <h1 className="font-heading font-bold text-4xl  ">| Popular Blogs</h1>
         <div className="flex  border-2 mt-4 border-gray-700  overflow-hidden relative  md:w-[650px] w-[94%] h-[450px]  rounded-lg shadow-xl ">
@@ -48,7 +48,7 @@ const Slider = ({ popularpost, trending }) => {
         <h1 className=" w-full ml-4  font-heading font-bold text-4xl ">
           | Trending Blogs
         </h1>
-        <div className="  flex  gap-4 md:h-[450px] md:w-[350px] w-[100%] md:pt-4 flex-wrap overflow-x-hidden  mt-3.5 md:flex-nowrap justify-center  md:justify-start md:items-center    md:flex-col  md:overflow-y-scroll md:border-2  border-gray-700  md:scrollbar-track-teal-400    rounded-lg ">
+        <div className="  flex  gap-4 md:h-[450px] md:w-[350px] w-[100%] md:pt-4 flex-wrap overflow-x-hidden  mt-3.5 lg:flex-nowrap justify-center  md:justify-start md:items-center    lg:flex-col  lg:overflow-y-scroll lg:border-2  border-gray-700  lg:scrollbar-track-teal-400    rounded-lg ">
           {trending.map((item) => (
             <Card blogdata={item} />
           ))}
