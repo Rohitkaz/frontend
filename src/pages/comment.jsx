@@ -1,19 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Scrollbar } from "react-scrollbars-custom";
 import axios from "axios";
 import Header from "./Header";
 import { IoIosArrowUp } from "react-icons/io";
-import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleDown, FaHireAHelper } from "react-icons/fa6";
 import Commentcard from "./commentcard";
 import { useAuthcontext } from "./context";
 const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
   const [comment, setComment] = useState();
   const context = useAuthcontext();
+  const [issendingcomm, setIssendingcomm] = useState(false);
   const [comments, setComments] = useState([]);
   const [replies, setReplies] = useState([]);
   const [showreplies, setShowreplies] = useState(false);
   const [showreplyindex, setShowreplyindex] = useState();
+  const [highlightedComment, setHighlightedComment] = useState(null);
+  const commentRefs = useRef({});
+  const handleHighlight = (commentId) => {
+    console.log(commentId);
+    setHighlightedComment(commentId);
+    if (commentRefs.current[commentId]) {
+      commentRefs.current[commentId].scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+    setTimeout(() => {
+      setHighlightedComment("");
+    }, 10000);
+  };
   useEffect(() => {
     const showcomments = async () => {
       const comms = await axios.get(
@@ -55,13 +71,13 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
     if (!comment) {
       return alert("Comment cannot be empty");
     }
+    setIssendingcomm(true);
     console.log(blogauthor);
     const comm = {
       blog_id: blogid,
       comment: comment,
       blogauthor: blogauthor,
     };
-    change();
 
     console.log(blogid);
     try {
@@ -72,13 +88,17 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
           withCredentials: true,
         }
       );
+      change();
+      setIssendingcomm(false);
+
       if (comments.length > 0) {
         setComments((prev) => [res.data, ...prev]);
       } else {
         showcomments();
       }
     } catch (err) {
-      console.log(err.message);
+      setIssendingcomm(false);
+      alert(err.response.data);
     }
   };
   const showcomments = async () => {
@@ -105,12 +125,18 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
           setComment(e.target.value);
         }}
       ></textarea>
-      <button
-        onClick={sendComment}
-        className="font-heading w-[87%] rounded-lg text-white bg-blue-700 hover:text-black h-[30px]"
-      >
-        Send
-      </button>
+      {issendingcomm ? (
+        <label className="font-heading w-[87%] text-center rounded-lg text-white bg-blue-700  h-[30px]">
+          Sending...
+        </label>
+      ) : (
+        <button
+          onClick={sendComment}
+          className="font-heading w-[87%] rounded-lg text-white bg-blue-700 hover:text-black h-[30px]"
+        >
+          Send
+        </button>
+      )}
       <button
         onClick={showcomments}
         className="font-heading w-[87%] rounded-lg text-white bg-blue-700 hover:text-black h-[30px]"
@@ -120,12 +146,18 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
       <div className="flex flex-col w-[100%] h-[80%]  items-center gap-1 mt-2 overflow-y-scroll scrollbar-track-black">
         {comments.map((comment, index) => (
           <>
-            <div className="flex flex-col w-[87%]  items-center  mt-2 border-2 border-red rounded-lg">
+            <div
+              ref={(el) => (commentRefs.current[comment._id] = el)}
+              className={`flex flex-col w-[87%]  items-center ${
+                highlightedComment === comment._id ? "bg-white" : null
+              } mt-2 border-2 border-red rounded-lg`}
+            >
               <Commentcard
                 comment={comment}
                 index={index}
                 change={changereplies}
                 changecomments={changecomments}
+                handleHighlight={handleHighlight}
               />
               <button
                 id={comment._id}
@@ -154,12 +186,20 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
             {showreplies && showreplyindex === index ? (
               <>
                 {replies.map((comment, index) => (
-                  <div className="w-[77%] border-2 border-emerald-600 md:ml-10 ml-[10%] rounded-lg">
+                  <div
+                    ref={(el) => (commentRefs.current[comment._id] = el)}
+                    className={`w-[77%] border-2 border-emerald-600 ${
+                      highlightedComment === comment._id
+                        ? "bg-yellow-100"
+                        : null
+                    } md:ml-10 ml-[10%] rounded-lg`}
+                  >
                     <Commentcard
                       comment={comment}
                       index={index}
                       change={changereplies}
                       changecomments={changecomments}
+                      handleHighlight={handleHighlight}
                     />
                   </div>
                 ))}

@@ -13,6 +13,7 @@ const Commentcard = ({
   change,
 
   changecomments,
+  handleHighlight,
 }) => {
   const [clikes, setClikes] = useState(comment.likes);
   const [isTrue, setIsTrue] = useState(false);
@@ -23,7 +24,10 @@ const Commentcard = ({
   const [replies, setReplies] = useState([]);
   const [showButtons, setShowbuttons] = useState(false);
   const [isdeleting, setisdeleting] = useState(false);
+  const [issending, setIssending] = useState(false);
+  const [highlightedComment, setHighlightedComment] = useState(null);
   const context = useAuthcontext();
+
   const showButton = () => {
     if (showButtons === true) setShowbuttons(false);
     else setShowbuttons(true);
@@ -59,7 +63,7 @@ const Commentcard = ({
     if (!reply) {
       return alert("reply cannot be empty");
     }
-
+    setIssending(true);
     const comm = {
       blog_id: comment.postId,
       commentid: e.target.id,
@@ -77,8 +81,10 @@ const Commentcard = ({
       );
 
       change(res.data, comment.parentId, index);
+      setIssending(false);
     } catch (err) {
-      console.log(err.message);
+      setIssending(false);
+      alert(err.response.message);
     }
   };
   const setlike = () => {
@@ -106,8 +112,13 @@ const Commentcard = ({
         <img className="w-[30px] h-[30px]" src="/images/user.png"></img>
         <div className="flex flex-row w-[90%] h-[10%]  font-heading text-sm font-bold gap-2 mt-1">
           <div>{comment.username}</div>
-          {comment.parentUsername ? (
-            <div className="text-blue-700">@{comment.parentUsername}</div>
+          {comment.Repliedto ? (
+            <div
+              className="text-blue-700 cursor-pointer"
+              onClick={() => handleHighlight(comment.Repliedtoid)}
+            >
+              @{comment.Repliedto}
+            </div>
           ) : null}
         </div>
         <div className=" flex flex-col w-[80%] items-center gap-1  ">
@@ -186,13 +197,19 @@ const Commentcard = ({
               }}
             ></textarea>
 
-            <button
-              onClick={sendReply}
-              id={comment._id}
-              className="border-2 border-black text-center w-[20%] bg-slate-400 text-white rounded-md"
-            >
-              send
-            </button>
+            {issending ? (
+              <label className="border-2 border-black text-center p-1 bg-gray-500 text--black font-heading rounded-md">
+                sending..
+              </label>
+            ) : (
+              <button
+                onClick={sendReply}
+                id={comment._id}
+                className="border-2 font-heading font-bold border-black text-center w-[20%] bg-slate-500 text-black rounded-md"
+              >
+                send
+              </button>
+            )}
           </div>
         ) : null}
       </div>
