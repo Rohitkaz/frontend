@@ -189,9 +189,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
                   <div
                     ref={(el) => (commentRefs.current[comment._id] = el)}
                     className={`w-[77%] border-2 border-emerald-600 ${
-                      highlightedComment === comment._id
-                        ? "bg-yellow-100"
-                        : null
+                      highlightedComment === comment._id ? "bg-white" : null
                     } md:ml-10 ml-[10%] rounded-lg`}
                   >
                     <Commentcard
