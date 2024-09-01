@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 import { useState, useContext, useEffect, useRef } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
-import BlogCard from "./BlogCard";
+
 import { useAuthcontext } from "./context";
 import { Navigate } from "react-router-dom";
 const Header = () => {
@@ -31,16 +31,34 @@ const Header = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [searchWrapperRef]);
-
+  useEffect(()=>{
+    const controller=new AbortController();
+    const signal=controller.signal;
+    const Fetchresult=async()=>{
+      try {
+        const result = await axios.get(
+          `https://blogfrontend-theta.vercel.app/search?query=${input}`
+        ,{signal:signal});
+        setSearchresult(result.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+    Fetchresult();
+    return ()=>{
+      controller.abort();
+    }
+  },[input])
   const logout = async () => {
     const result = await axios.get(
-      "https://blog-backend-u88k.onrender.com/Auth/logout",
+      "https://blogfrontend-theta.vercel.app/Auth/logout",
 
       {
         withCredentials: true,
       }
     );
     if (result.status === 204) {
+      localStorage.clear();
       navigate("/login");
     }
   };
@@ -55,17 +73,7 @@ const Header = () => {
     setIsHidden(false);
   };
 
-  const Search = async (e) => {
-    setInput(e.target.value);
-    try {
-      const result = await axios.get(
-        `https://blog-backend-u88k.onrender.com/search?query=${e.target.value}`
-      );
-      setSearchresult(result.data);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
+  
   return (
     <div className=" flex flex-row w-screen bg-black h-[40px] mt-[0px]  fixed z-10">
       <div
@@ -82,7 +90,7 @@ const Header = () => {
             <CiSearch className=" text-white font-heading  h-[100%] w-[7%] text-center mt-0.5" />
             <input
               value={input}
-              onChange={Search}
+              onChange={(e)=>setInput(e.target.value)}
               type="text"
               placeholder="Search..."
               className=" text-white font-heading  bg-black outline-none md:w-[95%] mt-1 md:mt-0 "

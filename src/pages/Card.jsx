@@ -4,14 +4,14 @@ const Card = ({ blogdata }) => {
   const defaultimg = (e) => {
     e.target.src = "/images/noimage.png";
   };
-  console.log(blogdata);
+  
   return (
     // <div className=" flex justify-center w-screen h-screen bg-gray-200">
     <div className="flex  flex-col mt-2  md:w-[300px] w-[290px] min-h-[400px] max-h-[400px]  rounded-lg p-2 bg-white transform transition-all hover:translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
       <div className="w-full ">
         <img
           className="w-full aspect-auto object-cover rounded-lg"
-          src={`https://blog-backend-u88k.onrender.com/images/${blogdata.image}`}
+          src={`https://blogfrontend-theta.vercel.app/images/${blogdata.image}`}
           onError={defaultimg}
         ></img>
       </div>

@@ -13,12 +13,17 @@ import axios from "axios";
 import BlogForm from "./pages/BlogForm";
 import ShowBlogPage from "./pages/ShowBlogpage";
 import Header from "./pages/Header";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/NewDashboard";
 import Allblog from "./pages/Allblog";
 import CommentBar from "./pages/comment";
 
 import Root from "./pages/Root";
 import { Await, defer } from "react-router-dom";
+import Card from "./pages/Card";
+import Slider from "./pages/Slider";
+import Editblog from "./pages/Editblog";
+import { getCachedData } from "./utils/cache";
+import { cacheset } from "./utils/cache";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,15 +33,12 @@ const router = createBrowserRouter([
         element: <Home />,
         path: "/",
         loader: async ({ params }) => {
-          console.log("hi");
+          // console.log("hi");
 
           try {
-            const res = axios.get(
-              `https://blog-backend-u88k.onrender.com/blog`,
-              {
-                withCredentials: true,
-              }
-            );
+            const res = axios.get(`https://blogfrontend-theta.vercel.app/blog`, {
+              withCredentials: true,
+            });
 
             return defer({ res: res });
           } catch (err) {
@@ -48,16 +50,20 @@ const router = createBrowserRouter([
         element: <Dashboard />,
         path: "/dashboard",
         loader: async ({ params }) => {
-          console.log("hi");
+          const data=await getCachedData();
+          console.log(data)
+          if(data)
+          {
+            console.log("from cache");
+            return data;
+          }
           try {
-            const res = await axios.get(
-              `https://blog-backend-u88k.onrender.com/dashboard`,
-              {
-                withCredentials: true,
-              }
-            );
+            const res = await axios.get(`https://blogfrontend-theta.vercel.app/dashboard`, {
+              withCredentials: true,
+            });
             const data = await res.data;
-
+            
+              cacheset(data.latestcomment,data.username,data.userdata);
             return data;
           } catch (err) {
             return redirect("/login");
@@ -65,45 +71,94 @@ const router = createBrowserRouter([
         },
       },
 
-      /* children: [
-          {
-            element: <Blog />,
-            path: "blog",
-          },
-        ],*/
-      // children: [
       {
-        element: <Login />,
-        path: "/Login",
+        element: <Slider />,
+        path: "/blog",
       },
 
       {
-        element: <CommentBar />,
-        path: "/contact",
+        element: <Login />,
+        path: "/Login",
+        loader: async ({ params }) => {
+        
+          try {
+            const res = await axios.get(`https://blogfrontend-theta.vercel.app/isauthenticated`, {
+              withCredentials: true,
+            });
+         return redirect("/");
+      
+
+            
+          } catch (err) {
+            
+      return {user:"unauthorized"};
+          }
+        },
       },
+      
+      
       {
         element: <Register />,
         path: "/Register",
+        loader: async ({ params }) => {
+        
+          try {
+            const res = await axios.get(`https://blogfrontend-theta.vercel.app/isauthenticated`, {
+              withCredentials: true,
+            });
+         return redirect("/");
+      
+
+            
+          } catch (err) {
+            
+      return {user:"unauthorized"};
+          }
+        },
       },
       {
         element: <BlogForm />,
         path: "/newblog",
+        loader: async ({ params }) => {
+        
+          try {
+            const res = await axios.get(`https://blogfrontend-theta.vercel.app/isauthenticated`, {
+              withCredentials: true,
+            });
+         return null;
+      
+
+            
+          } catch (err) {
+            
+      return redirect("/");
+          }
+        },
       },
       {
         element: <ShowBlogPage />,
         path: "/blog/:id",
         loader: async ({ params }) => {
-          console.log("hi");
+          // console.log("hi");
           try {
-            const res = await axios.get(
-              `https://blog-backend-u88k.onrender.com/blog/${params.id}`,
+            const blogPromise = axios.get(
+              `https://blogfrontend-theta.vercel.app/blog/${params.id}`,
               {
                 withCredentials: true,
               }
             );
-            const data = await res.data;
-            console.log(data);
-            return data;
+            const viewPromise = axios.get(
+              `https://blogfrontend-theta.vercel.app/blog/${params.id}/views`,
+              {
+                withCredentials: true,
+              }
+            );
+            const [blog, engagements] = await Promise.all([
+              blogPromise,
+              viewPromise,
+            ]);
+          console.log(engagements);
+            return { blog: blog.data.blog, engagement:engagements.data };
           } catch (err) {
             return redirect("/");
           }
@@ -113,15 +168,31 @@ const router = createBrowserRouter([
         element: <Allblog />,
         path: "/Yourblog",
         loader: async ({ params }) => {
-          console.log("hi");
+        
           try {
-            const res = await axios.get(
-              `https://blog-backend-u88k.onrender.com/Yourblog`,
-              {
-                withCredentials: true,
-              }
-            );
-            const data = await res.data;
+            const res = await axios.get(`https://blogfrontend-theta.vercel.app/isauthenticated`, {
+              withCredentials: true,
+            });
+         return null;
+      
+
+            
+          } catch (err) {
+            
+      return redirect("/")
+          }
+        },
+      },
+      {
+        element: <Editblog/>,
+        path: `/Editblog/:id`,
+       loader: async ({ params }) => {
+        
+          try {
+            const res = await axios.get(`https://blogfrontend-theta.vercel.app/blog/${params.id}`, {
+              withCredentials: true,
+            });
+            const data =  res.data.blog;
 
             return data;
           } catch (err) {
@@ -129,8 +200,7 @@ const router = createBrowserRouter([
           }
         },
       },
-      //  ],
-      //  },
+      
     ],
   },
 ]);

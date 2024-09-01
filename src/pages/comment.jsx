@@ -33,7 +33,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
   useEffect(() => {
     const showcomments = async () => {
       const comms = await axios.get(
-        `https://blog-backend-u88k.onrender.com/showcomments/${blogid}`,
+        `https://blogfrontend-theta.vercel.app/showcomments/${blogid}`,
         {
           withCredentials: true,
         }
@@ -81,13 +81,9 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
 
     console.log(blogid);
     try {
-      const res = await axios.post(
-        `https://blog-backend-u88k.onrender.com/comment`,
-        comm,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`https://blogfrontend-theta.vercel.app/comment`, comm, {
+        withCredentials: true,
+      });
       change();
       setIssendingcomm(false);
 
@@ -98,12 +94,12 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
       }
     } catch (err) {
       setIssendingcomm(false);
-      alert(err.response.data);
+      console.log(err.response.data);
     }
   };
   const showcomments = async () => {
     const comms = await axios.get(
-      `https://blog-backend-u88k.onrender.com/showcomments/${blogid}`,
+      `https://blogfrontend-theta.vercel.app/showcomments/${blogid}`,
       {
         withCredentials: true,
       }
@@ -143,14 +139,14 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
       >
         Showcomments
       </button>
-      <div className="flex flex-col w-[100%] h-[80%]  items-center gap-1 mt-2 overflow-y-scroll scrollbar-track-black">
+      <div className=" p-2 flex flex-col w-[100%] h-[80%]  items-center gap-1 mt-2 overflow-y-auto scrollbar-track-black">
         {comments.map((comment, index) => (
           <>
             <div
               ref={(el) => (commentRefs.current[comment._id] = el)}
-              className={`flex flex-col w-[87%]  items-center ${
-                highlightedComment === comment._id ? "bg-white" : null
-              } mt-2 border-2 border-red rounded-lg`}
+              className={`flex flex-col w-[87%]  items-center bg-white ${
+                highlightedComment === comment._id ? "shadow-lg shadow-blue-700" : null
+              } mt-2 shadow-lg rounded-lg p-2`}
             >
               <Commentcard
                 comment={comment}
@@ -167,7 +163,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
                     setShowreplyindex(-1);
                   } else {
                     const res = await axios.get(
-                      `https://blog-backend-u88k.onrender.com/showreplies/${blogid}/${e.target.id}`,
+                      `https://blogfrontend-theta.vercel.app/showreplies/${blogid}/${e.target.id}`,
 
                       {
                         withCredentials: true,
@@ -178,7 +174,7 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
                     setShowreplyindex(index);
                   }
                 }}
-                className="font-heading w-[87%] mt-0 rounded-lg text-black font-bold bg-gray-500 h-[30px]"
+                className="font-heading w-[87%] mt-1 rounded-lg  text-black bg-slate-400 h-[30px]"
               >
                 Replies
               </button>
@@ -188,9 +184,11 @@ const CommentBar = ({ blogid, blogauthor, change, deccomment }) => {
                 {replies.map((comment, index) => (
                   <div
                     ref={(el) => (commentRefs.current[comment._id] = el)}
-                    className={`w-[77%] border-2 border-emerald-600 ${
-                      highlightedComment === comment._id ? "bg-white" : null
-                    } md:ml-10 ml-[10%] rounded-lg`}
+                    className={`w-[77%] border-2 shadow-sm shadow-blue-400 mt-2 ${
+                      highlightedComment === comment._id
+                        ? "shadow-lg border-red-500 border-2 shadow-blue-600"
+                        : null
+                    } md:ml-10 ml-[10%] bg-white rounded-lg p-2`}
                   >
                     <Commentcard
                       comment={comment}

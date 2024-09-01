@@ -12,14 +12,17 @@ const ShowBlogPage = () => {
   const blogdata = useLoaderData();
 
   const blog = blogdata.blog;
-  const userlike = blogdata.userlike;
-  const [comments, setComments] = useState(blog.comments);
+  const views=blogdata.engagement.views;
+  
+  
+  
+  const [comments, setComments] = useState(blogdata.engagement.comments);
   const [showcommentbar, setShowcommentbar] = useState(false);
-  const [isLiked, setisLiked] = useState(userlike);
+const [isLiked, setisLiked] = useState(blogdata.engagement.userlike);
   const context = useAuthcontext();
-  console.log(isLiked);
+  
 
-  const [likes, setLikes] = useState(blog.likes);
+  const [likes, setLikes] = useState(blogdata.engagement.likes);
 
   const Comms = () => {
     console.log("hillos");
@@ -41,12 +44,9 @@ const ShowBlogPage = () => {
       console.log("hi");
 
       try {
-        const res = await axios.get(
-          `https://blog-backend-u88k.onrender.com/like/${blog._id}`,
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await axios.get(`https://blogfrontend-theta.vercel.app/like/${blog._id}`, {
+          withCredentials: true,
+        });
         setisLiked(true);
         setLikes(likes + 1);
         set;
@@ -58,7 +58,7 @@ const ShowBlogPage = () => {
       console.log("hello");
       try {
         const res = await axios.get(
-          `https://blog-backend-u88k.onrender.com/dislike/${blog._id}`,
+          `https://blogfrontend-theta.vercel.app/dislike/${blog._id}`,
           {
             withCredentials: true,
           }
@@ -81,9 +81,9 @@ const ShowBlogPage = () => {
   console.log(blog.content);
 
   return (
-    <div className=" flex flex-row   justify-center    w-[100%] ">
+    <div className=" flex flex-row   justify-center    w-[100%]  ">
       <div
-        className={`flex  flex-col  md:max-w-[700px] w-[94%] min-h-dvh bg-gray-200 p-4 gap-7 ${
+        className={`flex  flex-col mt-[42px] md:max-w-[700px] w-[94%] min-h-dvh bg-gray-200 p-4 gap-7 ${
           showcommentbar ? "blur-sm fixed" : "blur-none absolute"
         }   gap-2 border-2 `}
       >
@@ -104,7 +104,7 @@ const ShowBlogPage = () => {
         <div className="flex flex-row w-full gap-4 h-[50px] border-t-2 border-b-2 border-white p-4">
           <div className="flex flex-row h-full justify-center items-center gap-1  ">
             <IoEye className="h-[20px] w-[30px]" />
-            <h1>{blog.views}</h1>
+            <h1>{views}</h1>
           </div>
           <div className="flex flex-row h-full justify-center items-center gap-1  ">
             <AiTwotoneLike
@@ -123,15 +123,13 @@ const ShowBlogPage = () => {
         </div>
         <div classname=" w-full border-b-2    ">
           <img
-            src={`https://blog-backend-u88k.onrender.com/images/${blog.image}`}
+            src={`https://blogfrontend-theta.vercel.app/images/${blog.image}`}
             className="w-full max-h-[400px] object-cover rounded-lg "
           ></img>
         </div>
         <hr className="border-black border-2"></hr>
         <div className="flex flex-col w-full gap-2 ">
-          <h1 className=" font-bold md:text-5xl text-4xl">
-            This is the Title of blog
-          </h1>
+         
           {blog.content.map((para, ind) => (
             <>
               <h1 className=" w-full  font-heading font-bold ">{para.title}</h1>
@@ -142,8 +140,8 @@ const ShowBlogPage = () => {
         </div>
       </div>
       <div
-        className={` w-[90%]  md:w-[40%] ml-[10%] bg-gray-400  rounded-lg md:ml-[60%]  z-10 border-2 ${
-          showcommentbar ? "border-black" : "border-none"
+        className={` w-[90%]  md:w-[40%] ml-[10%] bg-gray-300  rounded-lg md:ml-[60%]  z-10 border-2 ${
+          showcommentbar ? "border-none" : "border-none"
         } fixed `}
       >
         {showcommentbar ? (

@@ -1,25 +1,63 @@
 import { CiSearch } from "react-icons/ci";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Outlet, useLoaderData } from "react-router-dom";
-import axios from "axios";
-import Card from "./Card";
+import axios from "axios"
 import Header from "./Header";
 import Dashboardheader from "./Dashboardheader";
+import Dashboardcard from "./Dashboardcard";
+import useAllblogs from "../hooks/Allbogshook";
 const Allblog = () => {
-  const post = useLoaderData();
-
+ // const [post,setPost]=useState([])
+   const [currentpage,setCurrentPage]=useState(0);
+ 
+  const {post,removeloadmore,isLoading}=useAllblogs(currentpage);
+   const handleClick=()=>{
+    setCurrentPage((prev)=>prev+1);
+   }
+ /*  useEffect(()=>{
+  
+        const fetchdata=async()=>{
+        
+          try {
+            const res = await axios.get(`https://blogfrontend-theta.vercel.app/Yourblog/${currentpage}`, {
+              withCredentials: true,
+            });
+            const data = res.data;
+            if(data.length==0 || data.length<4)
+            {
+              setRemoveloadmore(true);
+            }
+               setPost([...post,...data]);
+               
+            
+          } catch (err) {
+          console.log(err.message);
+          }
+        }
+        
+        fetchdata();
+   },[currentpage]);*/
   return (
     <>
-      <div className=" flex flex-col w-[screen] min-h-screen bg-gray-200 ">
-        <Header />
+      <div className=" flex flex-col w-[full] min-h-screen bg-gray-200 overflow-x-hidden ">
+        
         <Dashboardheader />
         {post.length > 0 ? (
-          <div className="flex   flex-wrap  gap-8 justify-center md:justify-start md:ml-4  md:flex-row w-screen h-[90%]    ">
+          <div className="w-screen flex  flex-col  items-center gap-2">
+          
+          <div className="flex flex-col mt-4 justify-center items-center    gap-8   md:ml-4 w-[80%]   md:w-[75%]      ">
             {post.map((blog, index) => (
-              <Card blogdata={blog} />
+              <Dashboardcard blogdata={blog} />
             ))}
+            
+          </div>
+          {removeloadmore?null:
+          <div className="flex w-[90%] justify-end">
+            {isLoading? <button onClick={handleClick} className="p-2 font-heading bg-purple-600 rounded-lg shadow-gray-400 shadow-lg text-white border-2 border-black transiton-all ease-in-out duration-300  hover:translate-x-2">Loading...</button>
+          :<button onClick={handleClick} className="p-2 font-heading bg-purple-600 rounded-lg shadow-gray-400 shadow-lg text-white border-2 border-black transiton-all ease-in-out duration-300  hover:translate-x-2">Load More...</button>
+            }</div>}
           </div>
         ) : (
           <div className="flex flex-col w-screen h-[100%]  items-center gap-2 justify-center">
