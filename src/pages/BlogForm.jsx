@@ -54,7 +54,7 @@ const BlogForm = () => {
       setisSubmitting(true);
       console.log(contentBox);
       const result = await axios.post(
-        "https://blogfrontend-theta.vercel.app/newblog",
+        "https://blog-backend-u88k.onrender.com/newblog",
         formData,
         {
           withCredentials: true,

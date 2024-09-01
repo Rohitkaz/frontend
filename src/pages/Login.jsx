@@ -17,7 +17,7 @@ const Login = () => {
     console.log(name);
     try {
       const result = await axios.post(
-        "https://blogfrontend-theta.vercel.app/Auth/login",
+        "https://blog-backend-u88k.onrender.com/Auth/login",
         { name: name, password: password },
         {
           withCredentials: true,

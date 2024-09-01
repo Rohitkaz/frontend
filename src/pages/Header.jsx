@@ -37,7 +37,7 @@ const Header = () => {
     const Fetchresult=async()=>{
       try {
         const result = await axios.get(
-          `https://blogfrontend-theta.vercel.app/search?query=${input}`
+          `https://blog-backend-u88k.onrender.com/search?query=${input}`
         ,{signal:signal});
         setSearchresult(result.data);
       } catch (err) {
@@ -51,7 +51,7 @@ const Header = () => {
   },[input])
   const logout = async () => {
     const result = await axios.get(
-      "https://blogfrontend-theta.vercel.app/Auth/logout",
+      "https://blog-backend-u88k.onrender.com/Auth/logout",
 
       {
         withCredentials: true,

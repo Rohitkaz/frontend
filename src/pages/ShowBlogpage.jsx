@@ -44,7 +44,7 @@ const [isLiked, setisLiked] = useState(blogdata.engagement.userlike);
       console.log("hi");
 
       try {
-        const res = await axios.get(`https://blogfrontend-theta.vercel.app/like/${blog._id}`, {
+        const res = await axios.get(`https://blog-backend-u88k.onrender.com/like/${blog._id}`, {
           withCredentials: true,
         });
         setisLiked(true);
@@ -58,7 +58,7 @@ const [isLiked, setisLiked] = useState(blogdata.engagement.userlike);
       console.log("hello");
       try {
         const res = await axios.get(
-          `https://blogfrontend-theta.vercel.app/dislike/${blog._id}`,
+          `https://blog-backend-u88k.onrender.com/dislike/${blog._id}`,
           {
             withCredentials: true,
           }
@@ -123,7 +123,7 @@ const [isLiked, setisLiked] = useState(blogdata.engagement.userlike);
         </div>
         <div classname=" w-full border-b-2    ">
           <img
-            src={`https://blogfrontend-theta.vercel.app/images/${blog.image}`}
+            src={`https://blog-backend-u88k.onrender.com/images/${blog.image}`}
             className="w-full max-h-[400px] object-cover rounded-lg "
           ></img>
         </div>

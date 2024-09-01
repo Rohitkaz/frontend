@@ -17,7 +17,7 @@ const Editblog = () => {
   const [contentBox, setContentBox] = useState(blogdata.content);
   const[image,setImage]=useState()
   const [title, setTitle] = useState(blogdata.maintitle);
-  const [file, setFile] = useState(`https://blogfrontend-theta.vercel.app/images/${blogdata.image}`);
+  const [file, setFile] = useState(`https://blog-backend-u88k.onrender.com/images/${blogdata.image}`);
   
   
   const [description, setDescription] = useState(blogdata.description);
@@ -59,7 +59,7 @@ const Editblog = () => {
       setisSubmitting(true);
     
       const result = await axios.post(
-        `https://blogfrontend-theta.vercel.app/editblog/${blogdata._id}`,
+        `https://blog-backend-u88k.onrender.com/editblog/${blogdata._id}`,
         formData,
         {
           withCredentials: true,

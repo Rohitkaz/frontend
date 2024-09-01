@@ -11,7 +11,7 @@ const Card = ({ blogdata }) => {
       <div className="w-full ">
         <img
           className="w-full aspect-auto object-cover rounded-lg"
-          src={`https://blogfrontend-theta.vercel.app/images/${blogdata.image}`}
+          src={`https://blog-backend-u88k.onrender.com/images/${blogdata.image}`}
           onError={defaultimg}
         ></img>
       </div>

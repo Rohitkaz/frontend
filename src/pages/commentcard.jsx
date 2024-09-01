@@ -42,7 +42,7 @@ const Commentcard = ({
     setisdeleting(true);
     try {
       const res = await axios.delete(
-        `https://blogfrontend-theta.vercel.app/deletecomment/${comment._id}/${comment.postId}/${comment.parentId}`,
+        `https://blog-backend-u88k.onrender.com/deletecomment/${comment._id}/${comment.postId}/${comment.parentId}`,
 
         {
           withCredentials: true,
@@ -72,7 +72,7 @@ const Commentcard = ({
     };
     console.log(comment.postId);
     try {
-      const res = await axios.post(`https://blogfrontend-theta.vercel.app/reply`, comm, {
+      const res = await axios.post(`https://blog-backend-u88k.onrender.com/reply`, comm, {
         withCredentials: true,
       });
 
@@ -90,7 +90,7 @@ const Commentcard = ({
     const commentid = comment._id;
     try {
       const res = await axios.post(
-        `https://blogfrontend-theta.vercel.app/likecomments`,
+        `https://blog-backend-u88k.onrender.com/likecomments`,
         { commentid: commentid },
         {
           withCredentials: true,

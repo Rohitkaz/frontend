@@ -36,7 +36,7 @@ const router = createBrowserRouter([
           // console.log("hi");
 
           try {
-            const res = axios.get(`https://blogfrontend-theta.vercel.app/blog`, {
+            const res = axios.get(`https://blog-backend-u88k.onrender.com/blog`, {
               withCredentials: true,
             });
 
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
             return data;
           }
           try {
-            const res = await axios.get(`https://blogfrontend-theta.vercel.app/dashboard`, {
+            const res = await axios.get(`https://blog-backend-u88k.onrender.com/dashboard`, {
               withCredentials: true,
             });
             const data = await res.data;
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
         
           try {
-            const res = await axios.get(`https://blogfrontend-theta.vercel.app/isauthenticated`, {
+            const res = await axios.get(`https://blog-backend-u88k.onrender.com/isauthenticated`, {
               withCredentials: true,
             });
          return redirect("/");
@@ -103,7 +103,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
         
           try {
-            const res = await axios.get(`https://blogfrontend-theta.vercel.app/isauthenticated`, {
+            const res = await axios.get(`https://blog-backend-u88k.onrender.com/isauthenticated`, {
               withCredentials: true,
             });
          return redirect("/");
@@ -122,7 +122,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
         
           try {
-            const res = await axios.get(`https://blogfrontend-theta.vercel.app/isauthenticated`, {
+            const res = await axios.get(`https://blog-backend-u88k.onrender.com/isauthenticated`, {
               withCredentials: true,
             });
          return null;
@@ -142,13 +142,13 @@ const router = createBrowserRouter([
           // console.log("hi");
           try {
             const blogPromise = axios.get(
-              `https://blogfrontend-theta.vercel.app/blog/${params.id}`,
+              `https://blog-backend-u88k.onrender.com/blog/${params.id}`,
               {
                 withCredentials: true,
               }
             );
             const viewPromise = axios.get(
-              `https://blogfrontend-theta.vercel.app/blog/${params.id}/views`,
+              `https://blog-backend-u88k.onrender.com/blog/${params.id}/views`,
               {
                 withCredentials: true,
               }
@@ -170,7 +170,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
         
           try {
-            const res = await axios.get(`https://blogfrontend-theta.vercel.app/isauthenticated`, {
+            const res = await axios.get(`https://blog-backend-u88k.onrender.com/isauthenticated`, {
               withCredentials: true,
             });
          return null;
@@ -189,7 +189,7 @@ const router = createBrowserRouter([
        loader: async ({ params }) => {
         
           try {
-            const res = await axios.get(`https://blogfrontend-theta.vercel.app/blog/${params.id}`, {
+            const res = await axios.get(`https://blog-backend-u88k.onrender.com/blog/${params.id}`, {
               withCredentials: true,
             });
             const data =  res.data.blog;

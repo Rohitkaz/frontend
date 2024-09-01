@@ -13,7 +13,7 @@ export const Contextprovider = ({ children }) => {
     const isAuthenticated = async () => {
       try {
         console.log("hiya hai");
-        const res = await axios.get(`https://blogfrontend-theta.vercel.app/isAuthenticated`, {
+        const res = await axios.get(`https://blog-backend-u88k.onrender.com/isAuthenticated`, {
           withCredentials: true,
         });
         console.log(res.data);

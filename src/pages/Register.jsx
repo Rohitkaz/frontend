@@ -15,7 +15,7 @@ const Register = () => {
     e.preventDefault();
     console.log("hi");
     try {
-      const result = await axios.post("https://blogfrontend-theta.vercel.app/Auth/register", {
+      const result = await axios.post("https://blog-backend-u88k.onrender.com/Auth/register", {
         name: name,
         password: password,
       });
