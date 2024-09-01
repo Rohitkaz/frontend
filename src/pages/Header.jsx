@@ -57,10 +57,10 @@ const Header = () => {
         withCredentials: true,
       }
     );
-    if (result.status === 204) {
+  
       localStorage.clear();
       navigate("/login");
-    }
+    
   };
   const openham = () => {
     setIsTrue(true);

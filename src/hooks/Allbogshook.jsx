@@ -34,7 +34,7 @@ export default function useAllblogs(currentpage)
         const fetchdata=async()=>{
         
           try {
-            const res = await axios.get(`https://blogfrontend-theta.vercel.app/Yourblog/${currentpage}`, {
+            const res = await axios.get(`https://blog-backend-u88k.onrender.com/Yourblog/${currentpage}`, {
               withCredentials: true,
             });
             const data = res.data;
